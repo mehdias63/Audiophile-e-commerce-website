@@ -9,6 +9,7 @@ export default function ProductDetailXX99II() {
 	return (
 		<div className="p-12">
 			<ProductDetail
+				id="xx99"
 				image={
 					<picture>
 						<source

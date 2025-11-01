@@ -9,6 +9,7 @@ export default function ProductDetailZX9() {
 	return (
 		<div className="p-12">
 			<ProductDetail
+				id="ZX9"
 				image={
 					<picture>
 						<source
