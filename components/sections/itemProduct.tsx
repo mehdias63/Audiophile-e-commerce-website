@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Button } from '../ui/button'
 
 export default function ItemProduct() {
@@ -24,9 +25,11 @@ export default function ItemProduct() {
 			</picture>
 			<div className="z-10 p-10 flex flex-col justify-center items-start gap-8">
 				<h4 className="text-h4 tracking-[0.125rem]">ZX7 SPEAKER</h4>
-				<Button className="bg-transparent border-[1px] border-black text-black hover:bg-black hover:text-white">
-					See Product
-				</Button>
+				<Link href="/productDetail/Speaker2">
+					<Button className="bg-transparent border-[1px] border-black text-black hover:bg-black hover:text-white">
+						See Product
+					</Button>
+				</Link>
 			</div>
 		</div>
 	)

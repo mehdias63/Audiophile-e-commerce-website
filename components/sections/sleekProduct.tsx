@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Button } from '../ui/button'
 
 export default function SleekProduct() {
@@ -24,9 +25,11 @@ export default function SleekProduct() {
 			</picture>
 			<div className="p-[5rem] flex flex-col justify-center items-start gap-8 bg-very-light-gray rounded-lg">
 				<h4 className="text-h4 tracking-[0.125rem]">YX1 EARPHONES</h4>
-				<Button className="bg-transparent border-[1px] border-black text-black hover:bg-black hover:text-white">
-					See Product
-				</Button>
+				<Link href="productDetail/Earphone">
+					<Button className="bg-transparent border-[1px] border-black text-black hover:bg-black hover:text-white">
+						See Product
+					</Button>
+				</Link>
 			</div>
 		</div>
 	)

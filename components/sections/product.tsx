@@ -1,4 +1,5 @@
 import { Button } from '../ui/button'
+import Link from 'next/link'
 
 export default function Product() {
 	return (
@@ -32,12 +33,14 @@ export default function Product() {
 					Upgrade to premium speakers that are phenomenally built to
 					deliver truly remarkable sound.
 				</p>
-				<Button
-					variant="secondary"
-					className="text-[.8125rem] font-bold uppercase tracking-[0.0625rem] mt-4"
-				>
-					See Product
-				</Button>
+				<Link href="/productDetail/Speaker1">
+					<Button
+						variant="secondary"
+						className="text-[.8125rem] font-bold uppercase tracking-[0.0625rem] mt-4"
+					>
+						See Product
+					</Button>
+				</Link>
 			</div>
 		</section>
 	)

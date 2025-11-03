@@ -2,6 +2,37 @@
 import React from 'react'
 import { useCart } from '@/context/CartContext'
 import Image from 'next/image'
+import { Button } from './ui/button'
+import { useRouter } from 'next/navigation'
+
+const productImages = [
+	{
+		id: 'YX1',
+		image: '/pic/product-yx1-earphones/image-gallery-3.png',
+	},
+	{
+		id: 'xx99',
+		image:
+			'/pic/product-xx99-mark-two-headphones/image-gallery-3.png',
+	},
+	{
+		id: 'xx99-i',
+		image:
+			'/pic/product-xx99-mark-one-headphones/image-gallery-3.png',
+	},
+	{
+		id: 'XX59',
+		image: '/pic/product-xx59-headphones/image-gallery-3.png',
+	},
+	{
+		id: 'ZX9',
+		image: '/pic/product-zx9-speaker/image-gallery-3.png',
+	},
+	{
+		id: 'ZX7',
+		image: '/pic/product-zx7-speaker/image-gallery-3.png',
+	},
+]
 
 export default function CartModal() {
 	const {
@@ -10,12 +41,18 @@ export default function CartModal() {
 		closeCart,
 		increase,
 		decrease,
-		removeItem,
 		clearCart,
 		total,
 	} = useCart()
 
+	const router = useRouter()
+
 	if (!isOpen) return null
+
+	const handleCheckout = () => {
+		closeCart()
+		router.push('/checkout')
+	}
 
 	return (
 		<div
@@ -27,73 +64,70 @@ export default function CartModal() {
 				className="absolute inset-0 bg-black/50 backdrop-blur-sm"
 				onClick={closeCart}
 			/>
-
 			<div className="relative m-8 w-[360px] bg-white rounded-lg shadow-2xl p-6 z-10">
 				<div className="flex items-center justify-between mb-4">
 					<h3 className="font-semibold text-lg">
 						CART ({items.length})
 					</h3>
-					<div className="text-sm text-gray-500">
-						<button
-							onClick={clearCart}
-							className="hover:underline disabled:opacity-40"
-							disabled={items.length === 0}
-						>
-							Remove all
-						</button>
-					</div>
+					<button
+						onClick={clearCart}
+						className="text-sm text-gray-500 hover:underline disabled:opacity-40"
+						disabled={items.length === 0}
+					>
+						Remove all
+					</button>
 				</div>
-
 				<div className="space-y-4 max-h-[420px] overflow-auto pr-2">
-					{items.length === 0 && (
+					{items.length === 0 ? (
 						<p className="text-sm text-gray-500">
 							Your cart is empty.
 						</p>
+					) : (
+						items.map(it => {
+							const found = productImages.find(p => p.id === it.id)
+							const imageSrc = found
+								? found.image
+								: '/images/placeholder.png'
+
+							return (
+								<div key={it.id} className="flex items-center gap-3">
+									<div className="w-12 h-12 rounded-md bg-gray-100 flex-shrink-0 overflow-hidden">
+										<Image
+											src={imageSrc}
+											alt={it.title}
+											width={48}
+											height={48}
+											className="object-cover"
+										/>
+									</div>
+									<div className="flex-1">
+										<p className="text-sm font-medium">{it.title}</p>
+										<p className="text-sm text-gray-500">
+											${Number(it.price).toLocaleString()}
+										</p>
+									</div>
+									<div className="flex items-center gap-2">
+										<div
+											onClick={() => decrease(it.id)}
+											className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-gray-100 cursor-pointer"
+										>
+											-
+										</div>
+										<div className="min-w-[28px] text-center">
+											{it.qty}
+										</div>
+										<div
+											onClick={() => increase(it.id)}
+											className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-gray-100 cursor-pointer"
+										>
+											+
+										</div>
+									</div>
+								</div>
+							)
+						})
 					)}
-
-					{items.map(it => (
-						<div key={it.id} className="flex items-center gap-3">
-							<div className="w-12 h-12 rounded-md bg-gray-100 flex-shrink-0 overflow-hidden">
-								{it.image ? (
-									<Image
-										src={it.image}
-										alt={it.title}
-										width={48}
-										height={48}
-									/>
-								) : (
-									<div className="w-full h-full bg-gray-200" />
-								)}
-							</div>
-
-							<div className="flex-1">
-								<div className="text-sm font-medium">{it.title}</div>
-								<div className="text-sm text-gray-500">
-									${Number(it.price).toLocaleString()}
-								</div>
-							</div>
-
-							<div className="flex items-center gap-2">
-								<button
-									onClick={() => decrease(it.id)}
-									className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-gray-100"
-								>
-									-
-								</button>
-								<div className="min-w-[28px] text-center">
-									{it.qty}
-								</div>
-								<button
-									onClick={() => increase(it.id)}
-									className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-gray-100"
-								>
-									+
-								</button>
-							</div>
-						</div>
-					))}
 				</div>
-
 				<div className="mt-6 flex flex-col gap-3">
 					<div className="flex items-center justify-between text-sm text-gray-500">
 						<span>TOTAL</span>
@@ -102,12 +136,9 @@ export default function CartModal() {
 						</span>
 					</div>
 
-					<button
-						className="w-full bg-[#D87D4A] text-white py-3 rounded-md hover:opacity-95 transition"
-						onClick={() => alert('Checkout placeholder')}
-					>
+					<Button className="w-full" onClick={handleCheckout}>
 						CHECKOUT
-					</button>
+					</Button>
 				</div>
 			</div>
 		</div>

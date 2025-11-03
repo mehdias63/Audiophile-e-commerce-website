@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Button } from '../ui/button'
 
 export default function Hero() {
@@ -33,7 +34,9 @@ export default function Hero() {
 					Experience natural, lifelike audio and exceptional build
 					quality made for the passionate music enthusiast.
 				</p>
-				<Button>See Product</Button>
+				<Link href="/productDetail/Headphones1">
+					<Button>See Product</Button>
+				</Link>
 			</div>
 		</div>
 	)

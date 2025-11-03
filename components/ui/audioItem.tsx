@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils'
 import { Button } from './button'
+import Link from 'next/link'
 
 export default function AudioItem({
 	image,
@@ -7,6 +8,7 @@ export default function AudioItem({
 	text,
 	isNewProduct = false,
 	className = '',
+	link,
 }) {
 	return (
 		<div
@@ -28,7 +30,9 @@ export default function AudioItem({
 				<p className="text-body-m opacity-50 text-center lg:text-left">
 					{text}
 				</p>
-				<Button>See Product</Button>
+				<Link href={link}>
+					<Button>See Product</Button>
+				</Link>
 			</div>
 		</div>
 	)

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Input } from './input'
+import { Input } from './input1'
 import { cn } from '@/lib/utils'
 export default function InputWithError({ error, text }) {
 	return (

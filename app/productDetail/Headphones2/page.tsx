@@ -63,6 +63,7 @@ export default function ProductDetailXX99I() {
 							/>
 						</picture>
 					}
+					link="/productDetail/Headphones1"
 				/>
 				<ProductControl
 					text="XX59"
@@ -87,6 +88,7 @@ export default function ProductDetailXX99I() {
 							/>
 						</picture>
 					}
+					link="/productDetail/Headphones3"
 				/>
 				<ProductControl
 					text="ZX9 SPEAKER"
@@ -110,6 +112,7 @@ export default function ProductDetailXX99I() {
 							/>
 						</picture>
 					}
+					link="/productDetail/Speaker1"
 				/>
 			</div>
 			<AudioDeviceControl />
