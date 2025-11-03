@@ -65,14 +65,14 @@ export default function ProductDetail({
 					<div className="flex gap-5 justify-center items-center bg-very-light-gray py-3 px-5 rounded-lg">
 						<button
 							onClick={handleDecrease}
-							className="w-6 text-lg font-bold"
+							className="w-6 text-lg font-bold hover:text-burnt-orange"
 						>
 							-
 						</button>
 						<p className="min-w-[24px] text-center">{quantity}</p>
 						<button
 							onClick={handleIncrease}
-							className="w-6 text-lg font-bold"
+							className="w-6 text-lg font-bold hover:text-burnt-orange"
 						>
 							+
 						</button>

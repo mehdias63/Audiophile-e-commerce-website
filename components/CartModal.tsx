@@ -71,7 +71,7 @@ export default function CartModal() {
 					</h3>
 					<button
 						onClick={clearCart}
-						className="text-sm text-gray-500 hover:underline disabled:opacity-40"
+						className="text-sm text-gray-500 hover:text-burnt-orange disabled:opacity-40"
 						disabled={items.length === 0}
 					>
 						Remove all
@@ -109,7 +109,7 @@ export default function CartModal() {
 									<div className="flex items-center gap-2">
 										<div
 											onClick={() => decrease(it.id)}
-											className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-gray-100 cursor-pointer"
+											className="w-8 h-8 flex items-center justify-center rounded-md hover:text-burnt-orange cursor-pointer"
 										>
 											-
 										</div>
@@ -118,7 +118,7 @@ export default function CartModal() {
 										</div>
 										<div
 											onClick={() => increase(it.id)}
-											className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-gray-100 cursor-pointer"
+											className="w-8 h-8 flex items-center justify-center rounded-md hover:text-burnt-orange cursor-pointer"
 										>
 											+
 										</div>

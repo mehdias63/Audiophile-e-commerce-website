@@ -6,8 +6,6 @@ import { useCart } from '@/context/CartContext'
 export default function Header() {
 	const [mobileOpen, setMobileOpen] = useState(false)
 	const { items, openCart } = useCart()
-
-	// محاسبه مجموع تعداد محصولات
 	const totalItems = items.reduce((sum, item) => sum + item.qty, 0)
 
 	return (
@@ -73,8 +71,6 @@ export default function Header() {
 					</li>
 				</ul>
 			</nav>
-
-			{/* آیکون cart + badge */}
 			<div
 				className="relative md:ml-auto md:mr-1 z-30 cursor-pointer"
 				onClick={openCart}
