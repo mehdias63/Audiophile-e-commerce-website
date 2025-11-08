@@ -1,6 +1,16 @@
 import { cn } from '@/lib/utils'
 import { Button } from './button'
 import Link from 'next/link'
+import { ReactNode } from 'react'
+
+interface AudioItemProps {
+	image: ReactNode
+	title: string
+	text: string
+	isNewProduct?: boolean
+	className?: string
+	link: string
+}
 
 export default function AudioItem({
 	image,
@@ -9,7 +19,7 @@ export default function AudioItem({
 	isNewProduct = false,
 	className = '',
 	link,
-}) {
+}: AudioItemProps) {
 	return (
 		<div
 			className={cn(

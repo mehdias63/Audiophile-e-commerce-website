@@ -1,11 +1,24 @@
 'use client'
+
 import React from 'react'
 import { useCart } from '@/context/CartContext'
 import Image from 'next/image'
 import { Button } from './ui/button'
 import { useRouter } from 'next/navigation'
 
-const productImages = [
+interface CartItem {
+	id: string
+	title: string
+	price: number | string
+	qty: number
+}
+
+interface ProductImage {
+	id: string
+	image: string
+}
+
+const productImages: ProductImage[] = [
 	{
 		id: 'YX1',
 		image: '/pic/product-yx1-earphones/image-gallery-3.png',
@@ -43,7 +56,15 @@ export default function CartModal() {
 		decrease,
 		clearCart,
 		total,
-	} = useCart()
+	} = useCart() as {
+		items: CartItem[]
+		isOpen: boolean
+		closeCart: () => void
+		increase: (id: string) => void
+		decrease: (id: string) => void
+		clearCart: () => void
+		total: number
+	}
 
 	const router = useRouter()
 
@@ -69,27 +90,27 @@ export default function CartModal() {
 					<h3 className="font-semibold text-lg">
 						CART ({items.length})
 					</h3>
-					<button
+					<span
 						onClick={clearCart}
-						className="text-sm text-gray-500 hover:text-burnt-orange disabled:opacity-40"
-						disabled={items.length === 0}
+						role="button"
+						tabIndex={0}
+						className="text-sm text-gray-500 hover:text-burnt-orange disabled:opacity-40 cursor-pointer select-none"
 					>
 						Remove all
-					</button>
+					</span>
 				</div>
+
 				<div className="space-y-4 max-h-[420px] overflow-auto pr-2">
 					{items.length === 0 ? (
 						<p className="text-sm text-gray-500">
 							Your cart is empty.
 						</p>
 					) : (
-						items.map(it => {
+						items.map((it: CartItem) => {
 							const found = productImages.find(p => p.id === it.id)
 							const imageSrc = found
 								? found.image
 								: '/images/placeholder.png'
-
-							// 🔸 عنوان اصلاح‌شده (حذف Headphones, Speakers, Earphones)
 							const displayTitle = it.title
 								.replace(
 									/\s*(Headphones|Speakers|Earphones)\s*$/i,

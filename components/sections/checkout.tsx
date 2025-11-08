@@ -325,6 +325,13 @@ export default function CheckoutPage() {
 							const imageSrc = found
 								? found.image
 								: '/images/placeholder.png'
+
+							const displayTitle = it.title
+								.replace(
+									/\s*(Headphones|Speakers|Earphones)\s*$/i,
+									'',
+								)
+								.trim()
 							return (
 								<div
 									key={it.id}
@@ -342,7 +349,7 @@ export default function CheckoutPage() {
 										</div>
 										<div>
 											<p className="text-sm font-medium">
-												{it.title}
+												{displayTitle}
 											</p>
 											<p className="text-sm text-gray-500">
 												${Number(it.price).toLocaleString()}

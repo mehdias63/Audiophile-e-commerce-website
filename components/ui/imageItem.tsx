@@ -1,4 +1,13 @@
-export default function ImageItem({ icon, icon2, icon3 }) {
+interface ImageItemProps {
+	icon: string
+	icon2: string
+	icon3: string
+}
+export default function ImageItem({
+	icon,
+	icon2,
+	icon3,
+}: ImageItemProps) {
 	return (
 		<div className="pt-6 grid grid-cols-1 md:grid-cols-2 gap-3">
 			<div>{icon}</div>

@@ -3,12 +3,19 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+interface DeviceControlProps {
+	icon: string
+	text: string
+	imageClassName?: string
+	link: string
+}
+
 export default function DeviceControl({
 	icon,
 	text,
-	imageClassName,
+	imageClassName = '',
 	link,
-}) {
+}: DeviceControlProps) {
 	return (
 		<div className="relative p-4 pt-14">
 			<div className="absolute w-full top-0 right-0 flex justify-center items-center">
