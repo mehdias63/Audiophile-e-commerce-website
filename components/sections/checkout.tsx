@@ -14,13 +14,11 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { useState, ChangeEvent } from 'react'
 import OrderConfirmationModal from '@/components/sections/OrderConfirmationModal'
 
-// ✅ نوع آیتم‌های محصول برای نمایش در summary
 interface ProductImage {
 	id: string
 	image: string
 }
 
-// ✅ نوع داده‌های فرم برای مدیریت state فرم
 interface FormData {
 	name: string
 	email: string
@@ -33,10 +31,8 @@ interface FormData {
 	emoneyPin: string
 }
 
-// ✅ نوع خطاهای فرم (هر فیلد می‌تواند پیام خطای خاص خودش را داشته باشد)
 type FormErrors = Partial<Record<keyof FormData, string>>
 
-// ✅ نوع آیتم‌های داخل سبد خرید (بسته به context شما ممکن است تغییر کند)
 interface CartItem {
 	id: string
 	title: string
@@ -152,7 +148,6 @@ export default function CheckoutPage() {
 						</h1>
 					</CardHeader>
 					<CardContent>
-						{/* Billing Details */}
 						<section className="mb-8">
 							<h2 className="text-burnt-orange uppercase text-xs font-bold mb-4">
 								Billing Details
@@ -200,8 +195,6 @@ export default function CheckoutPage() {
 								))}
 							</div>
 						</section>
-
-						{/* Shipping Info */}
 						<section className="mb-8">
 							<h2 className="text-burnt-orange uppercase text-xs font-bold mb-4">
 								Shipping Info
@@ -258,8 +251,6 @@ export default function CheckoutPage() {
 								))}
 							</div>
 						</section>
-
-						{/* Payment Details */}
 						<section>
 							<h2 className="text-burnt-orange uppercase text-xs font-bold mb-4">
 								Payment Details
@@ -326,7 +317,6 @@ export default function CheckoutPage() {
 					</CardContent>
 				</Card>
 
-				{/* Summary */}
 				<Card className="bg-white p-6 rounded-lg shadow-sm h-fit">
 					<h3 className="text-lg font-bold mb-6">Summary</h3>
 					<div className="space-y-4 max-h-[300px] overflow-auto">

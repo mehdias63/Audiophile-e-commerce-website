@@ -5,16 +5,13 @@ import { Button } from '../ui/button'
 import { useCart } from '@/context/CartContext'
 import Image from 'next/image'
 
-// 🔸 نوع پارامتر ورودی تابع کمکی getImageSrc مشخص شد
 function getImageSrc(img: string | ReactNode): string | null {
 	if (!img) return null
 	if (typeof img === 'string') return img
-	// ReactNode ممکن است Image یا JSX.Element باشد
 	const element = img as { props?: { src?: string } }
 	return element?.props?.src ?? null
 }
 
-// 🔸 تعریف props با TypeScript interface
 interface ProductDetailProps {
 	id: string | number
 	image: string | ReactNode
@@ -24,7 +21,6 @@ interface ProductDetailProps {
 	isNewProduct?: boolean
 }
 
-// 🔸 تایپ کامپوننت: خروجی JSX.Element
 export default function ProductDetail({
 	id,
 	image,
@@ -33,7 +29,6 @@ export default function ProductDetail({
 	price,
 	isNewProduct = false,
 }: ProductDetailProps): JSX.Element {
-	// 🔸 مقدار price را به عدد تبدیل می‌کنیم، حتی اگر رشته باشد
 	const numericPrice =
 		parseFloat(String(price).replace(/[^0-9.]/g, '')) || 0
 
@@ -56,7 +51,6 @@ export default function ProductDetail({
 
 	return (
 		<div className="flex flex-col md:flex-row gap-3 md:gap-16 justify-center items-center py-10 rounded-lg">
-			{/* ✅ بخش تصویر */}
 			<div className="flex w-full justify-center items-center bg-very-light-gray p-8 rounded-lg">
 				{typeof image === 'string' ? (
 					<Image
@@ -70,8 +64,6 @@ export default function ProductDetail({
 					image
 				)}
 			</div>
-
-			{/* ✅ جزئیات محصول */}
 			<div className="flex flex-col justify-center items-center md:items-start">
 				{isNewProduct && (
 					<p className="text-body-m tracking-[0.625rem] text-burnt-orange mb-2">
@@ -88,12 +80,8 @@ export default function ProductDetail({
 				<p className="text-h6 my-5">
 					${(numericPrice * quantity).toLocaleString()}
 				</p>
-
-				{/* ✅ کنترل تعداد + دکمه افزودن به سبد */}
 				<div className="flex justify-center items-center gap-5">
-					{/* بخش افزایش/کاهش تعداد */}
 					<div className="flex justify-center items-center bg-very-light-gray py-3 px-4 gap-x-6">
-						{/* 🔹 به جای <button> از shadcn <Button> استفاده می‌کنیم */}
 						<div
 							onClick={handleDecrease}
 							className="text-lg font-bold hover:text-burnt-orange px-2 cursor-pointer opacity-25"
