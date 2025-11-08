@@ -1,17 +1,24 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { BiLogoFacebookSquare } from 'react-icons/bi'
-import { FaTwitter } from 'react-icons/fa'
-import { FaInstagram } from 'react-icons/fa'
+import { FaTwitter, FaInstagram } from 'react-icons/fa'
 
-export default function Footer() {
+// ✅ چون این کامپوننت هیچ prop خاصی دریافت نمی‌کنه، نیازی به تعریف interface نیست
+export default function Footer(): JSX.Element {
 	return (
-		<footer className="flex flex-col w-full justify-center items-center md:items-start bg-dark p-8 gap-12  text-white">
+		<footer className="flex flex-col w-full justify-center items-center md:items-start bg-dark p-8 gap-12 text-white">
+			{/* لوگو و ناوبری */}
 			<div className="w-full flex flex-col items-center md:items-start lg:flex-row lg:justify-between">
-				<img
+				{/* ❌ در Next.js بهتره به جای <img> از <Image> استفاده کنیم */}
+				<Image
 					src="/audiophile.svg"
-					alt="logo"
-					className="w-[8.9375rem] mt-4"
+					alt="Audiophile logo"
+					width={143} // بهتره اندازه‌ها مشخص بشن تا layout shift رخ نده
+					height={25}
+					className="mt-4"
+					priority
 				/>
+
 				<nav>
 					<ul className="flex flex-col md:flex-row items-center gap-6 lg:flex-row leading-6 md:gap-10 mt-4 lg:ml-14">
 						<li>
@@ -37,26 +44,53 @@ export default function Footer() {
 					</ul>
 				</nav>
 			</div>
+
+			{/* توضیحات */}
 			<p className="text-[0.9375rem] leading-[1.5625rem] opacity-50 lg:w-1/2 text-center sm:text-left">
 				Audiophile is an all in one stop to fulfill your audio needs.
 				We're a small team of music lovers and sound specialists who
 				are devoted to helping you get the most out of personal audio.
 				Come and visit our demo facility - we’re open 7 days a week.
 			</p>
+
+			{/* کپی‌رایت و شبکه‌های اجتماعی */}
 			<div className="w-full sm:flex sm:justify-between items-center">
 				<p className="opacity-50 text-[0.9375rem] leading-[1.5625rem] font-bold text-center mb-4 sm:mb-0">
 					Copyright 2021. All Rights Reserved
 				</p>
-				<div className=" flex gap-6 justify-center items-center lg:mt-[-10rem]">
-					<a className="a-link" href="https://facebook.com">
-						<BiLogoFacebookSquare />
-					</a>
-					<a className="a-link" href="https://twitter.com">
-						<FaTwitter />
-					</a>
-					<a className="a-link" href="https://instagram.com">
-						<FaInstagram />
-					</a>
+
+				<div className="flex gap-6 justify-center items-center lg:mt-[-10rem]">
+					{/* ✅ بهتر است به جای <a> از <Link> برای consistency و امنیت استفاده کنیم */}
+					{/* چون لینک‌های خارجی هستند، target="_blank" + rel="noopener noreferrer" اضافه می‌کنیم */}
+					<Link
+						href="https://facebook.com"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="a-link"
+						aria-label="Visit our Facebook"
+					>
+						<BiLogoFacebookSquare size={24} />
+					</Link>
+
+					<Link
+						href="https://twitter.com"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="a-link"
+						aria-label="Visit our Twitter"
+					>
+						<FaTwitter size={24} />
+					</Link>
+
+					<Link
+						href="https://instagram.com"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="a-link"
+						aria-label="Visit our Instagram"
+					>
+						<FaInstagram size={24} />
+					</Link>
 				</div>
 			</div>
 		</footer>

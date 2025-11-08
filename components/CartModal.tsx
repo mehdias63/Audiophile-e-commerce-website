@@ -89,6 +89,14 @@ export default function CartModal() {
 								? found.image
 								: '/images/placeholder.png'
 
+							// 🔸 عنوان اصلاح‌شده (حذف Headphones, Speakers, Earphones)
+							const displayTitle = it.title
+								.replace(
+									/\s*(Headphones|Speakers|Earphones)\s*$/i,
+									'',
+								)
+								.trim()
+
 							return (
 								<div key={it.id} className="flex items-center gap-3">
 									<div className="w-12 h-12 rounded-md bg-gray-100 flex-shrink-0 overflow-hidden">
@@ -101,15 +109,17 @@ export default function CartModal() {
 										/>
 									</div>
 									<div className="flex-1">
-										<p className="text-sm font-medium">{it.title}</p>
+										<p className="text-sm font-medium">
+											{displayTitle}
+										</p>
 										<p className="text-sm text-gray-500">
 											${Number(it.price).toLocaleString()}
 										</p>
 									</div>
-									<div className="flex items-center gap-2">
+									<div className="flex items-center gap-2 bg-very-light-gray">
 										<div
 											onClick={() => decrease(it.id)}
-											className="w-8 h-8 flex items-center justify-center rounded-md hover:text-burnt-orange cursor-pointer"
+											className="w-8 h-8 flex items-center justify-center rounded-md hover:text-burnt-orange cursor-pointer opacity-25"
 										>
 											-
 										</div>
@@ -118,7 +128,7 @@ export default function CartModal() {
 										</div>
 										<div
 											onClick={() => increase(it.id)}
-											className="w-8 h-8 flex items-center justify-center rounded-md hover:text-burnt-orange cursor-pointer"
+											className="w-8 h-8 flex items-center justify-center rounded-md hover:text-burnt-orange cursor-pointer opacity-25"
 										>
 											+
 										</div>

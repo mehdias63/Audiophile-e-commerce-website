@@ -11,10 +11,40 @@ import {
 } from '@/components/ui/radio-group'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
-import { useState } from 'react'
+import { useState, ChangeEvent } from 'react'
 import OrderConfirmationModal from '@/components/sections/OrderConfirmationModal'
 
-const productImages = [
+// ✅ نوع آیتم‌های محصول برای نمایش در summary
+interface ProductImage {
+	id: string
+	image: string
+}
+
+// ✅ نوع داده‌های فرم برای مدیریت state فرم
+interface FormData {
+	name: string
+	email: string
+	phone: string
+	address: string
+	zip: string
+	city: string
+	country: string
+	emoneyNum: string
+	emoneyPin: string
+}
+
+// ✅ نوع خطاهای فرم (هر فیلد می‌تواند پیام خطای خاص خودش را داشته باشد)
+type FormErrors = Partial<Record<keyof FormData, string>>
+
+// ✅ نوع آیتم‌های داخل سبد خرید (بسته به context شما ممکن است تغییر کند)
+interface CartItem {
+	id: string
+	title: string
+	price: number
+	qty: number
+}
+
+const productImages: ProductImage[] = [
 	{
 		id: 'YX1',
 		image: '/pic/product-yx1-earphones/image-gallery-3.png',
@@ -45,10 +75,16 @@ const productImages = [
 
 export default function CheckoutPage() {
 	const router = useRouter()
-	const { items, total } = useCart()
-	const [payment, setPayment] = useState('e-money')
+	const { items, total } = useCart() as {
+		items: CartItem[]
+		total: number
+	}
+
+	const [payment, setPayment] = useState<'e-money' | 'cash'>(
+		'e-money',
+	)
 	const [showConfirm, setShowConfirm] = useState(false)
-	const [formData, setFormData] = useState({
+	const [formData, setFormData] = useState<FormData>({
 		name: '',
 		email: '',
 		phone: '',
@@ -59,20 +95,20 @@ export default function CheckoutPage() {
 		emoneyNum: '',
 		emoneyPin: '',
 	})
-	const [errors, setErrors] = useState<{ [key: string]: string }>({})
+	const [errors, setErrors] = useState<FormErrors>({})
 
 	const shipping = 50
 	const vat = total * 0.2
 	const grandTotal = total + shipping + vat
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { id, value } = e.target
 		setFormData(prev => ({ ...prev, [id]: value }))
 		setErrors(prev => ({ ...prev, [id]: '' }))
 	}
 
-	const validate = () => {
-		const newErrors: { [key: string]: string } = {}
+	const validate = (): boolean => {
+		const newErrors: FormErrors = {}
 
 		Object.entries(formData).forEach(([key, value]) => {
 			if (
@@ -80,7 +116,8 @@ export default function CheckoutPage() {
 				(payment === 'e-money' ||
 					(key !== 'emoneyNum' && key !== 'emoneyPin'))
 			) {
-				newErrors[key] = 'This field cannot be empty'
+				newErrors[key as keyof FormData] =
+					'This field cannot be empty'
 			}
 		})
 
@@ -106,6 +143,7 @@ export default function CheckoutPage() {
 			<Button variant="ghost" onClick={() => router.back()}>
 				Go Back
 			</Button>
+
 			<div className="grid lg:grid-cols-[2fr_1fr] gap-8">
 				<Card className="bg-white p-8 rounded-lg shadow-sm">
 					<CardHeader>
@@ -114,21 +152,20 @@ export default function CheckoutPage() {
 						</h1>
 					</CardHeader>
 					<CardContent>
+						{/* Billing Details */}
 						<section className="mb-8">
 							<h2 className="text-burnt-orange uppercase text-xs font-bold mb-4">
 								Billing Details
 							</h2>
 							<div className="grid md:grid-cols-2 gap-4">
-								{['name', 'email', 'phone'].map(field => (
+								{(
+									['name', 'email', 'phone'] as (keyof FormData)[]
+								).map(field => (
 									<div key={field} className="relative">
 										<div className="flex justify-between items-center">
 											<Label
 												htmlFor={field}
-												className={`${
-													errors[field]
-														? 'text-red-500'
-														: 'text-gray-700'
-												}`}
+												className={`${errors[field] ? 'text-red-500' : 'text-gray-700'}`}
 											>
 												{field === 'name'
 													? 'Name'
@@ -163,28 +200,26 @@ export default function CheckoutPage() {
 								))}
 							</div>
 						</section>
+
+						{/* Shipping Info */}
 						<section className="mb-8">
 							<h2 className="text-burnt-orange uppercase text-xs font-bold mb-4">
 								Shipping Info
 							</h2>
 							<div className="grid gap-4">
-								{['address', 'zip', 'city', 'country'].map(field => (
-									<div
-										key={field}
-										className={`${
-											field === 'zip' || field === 'city'
-												? 'md:col-span-1'
-												: ''
-										}`}
-									>
+								{(
+									[
+										'address',
+										'zip',
+										'city',
+										'country',
+									] as (keyof FormData)[]
+								).map(field => (
+									<div key={field}>
 										<div className="flex justify-between items-center">
 											<Label
 												htmlFor={field}
-												className={`${
-													errors[field]
-														? 'text-red-500'
-														: 'text-gray-700'
-												}`}
+												className={`${errors[field] ? 'text-red-500' : 'text-gray-700'}`}
 											>
 												{field === 'address'
 													? 'Address'
@@ -223,6 +258,8 @@ export default function CheckoutPage() {
 								))}
 							</div>
 						</section>
+
+						{/* Payment Details */}
 						<section>
 							<h2 className="text-burnt-orange uppercase text-xs font-bold mb-4">
 								Payment Details
@@ -231,7 +268,9 @@ export default function CheckoutPage() {
 								<Label>Payment Method</Label>
 								<RadioGroup
 									value={payment}
-									onValueChange={setPayment}
+									onValueChange={value =>
+										setPayment(value as 'e-money' | 'cash')
+									}
 									className="grid gap-3"
 								>
 									<div className="flex items-center space-x-2 border rounded-md p-3">
@@ -244,18 +283,17 @@ export default function CheckoutPage() {
 									</div>
 								</RadioGroup>
 							</div>
+
 							{payment === 'e-money' && (
 								<div className="grid md:grid-cols-2 gap-4">
-									{['emoneyNum', 'emoneyPin'].map(field => (
+									{(
+										['emoneyNum', 'emoneyPin'] as (keyof FormData)[]
+									).map(field => (
 										<div key={field}>
 											<div className="flex justify-between items-center">
 												<Label
 													htmlFor={field}
-													className={`${
-														errors[field]
-															? 'text-red-500'
-															: 'text-gray-700'
-													}`}
+													className={`${errors[field] ? 'text-red-500' : 'text-gray-700'}`}
 												>
 													{field === 'emoneyNum'
 														? 'e-Money Number'
@@ -287,6 +325,8 @@ export default function CheckoutPage() {
 						</section>
 					</CardContent>
 				</Card>
+
+				{/* Summary */}
 				<Card className="bg-white p-6 rounded-lg shadow-sm h-fit">
 					<h3 className="text-lg font-bold mb-6">Summary</h3>
 					<div className="space-y-4 max-h-[300px] overflow-auto">
@@ -324,6 +364,7 @@ export default function CheckoutPage() {
 							)
 						})}
 					</div>
+
 					<div className="mt-6 space-y-2 text-sm">
 						<div className="flex justify-between text-gray-500">
 							<span>Total</span>
@@ -344,6 +385,7 @@ export default function CheckoutPage() {
 							<span>${grandTotal.toFixed(0)}</span>
 						</div>
 					</div>
+
 					<Button
 						className="w-full mt-6 bg-burnt-orange text-white hover:opacity-90"
 						onClick={handleSubmit}
@@ -352,6 +394,7 @@ export default function CheckoutPage() {
 					</Button>
 				</Card>
 			</div>
+
 			<OrderConfirmationModal
 				isOpen={showConfirm}
 				onClose={() => setShowConfirm(false)}
