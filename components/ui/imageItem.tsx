@@ -1,7 +1,7 @@
 interface ImageItemProps {
-	icon: string
-	icon2: string
-	icon3: string
+	icon: React.ReactNode
+	icon2: React.ReactNode
+	icon3: React.ReactNode
 }
 export default function ImageItem({
 	icon,
