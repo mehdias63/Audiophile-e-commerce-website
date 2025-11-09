@@ -42,9 +42,9 @@ export default function Footer(): JSX.Element {
 			</div>
 			<p className="text-[0.9375rem] leading-[1.5625rem] opacity-50 lg:w-1/2 text-center sm:text-left">
 				Audiophile is an all in one stop to fulfill your audio needs.
-				We're a small team of music lovers and sound specialists who
+				We are a small team of music lovers and sound specialists who
 				are devoted to helping you get the most out of personal audio.
-				Come and visit our demo facility - we’re open 7 days a week.
+				Come and visit our demo facility - we are open 7 days a week.
 			</p>
 			<div className="w-full sm:flex sm:justify-between items-center">
 				<p className="opacity-50 text-[0.9375rem] leading-[1.5625rem] font-bold text-center mb-4 sm:mb-0">
