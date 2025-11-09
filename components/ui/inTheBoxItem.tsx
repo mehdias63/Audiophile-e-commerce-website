@@ -1,6 +1,6 @@
 interface InTheBoxItemProps {
 	text: string
-	number: number
+	number: string
 }
 export default function InTheBoxItem({
 	text,
