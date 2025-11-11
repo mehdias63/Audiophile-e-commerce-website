@@ -78,7 +78,7 @@ export default function OrderConfirmationModal({
 						exit={{ scale: 0.9, opacity: 0 }}
 					>
 						<div className="flex justify-center mb-6">
-							<div className="bg-[#D87D4A] rounded-full p-3">
+							<div className="bg-burnt-orange rounded-full p-3">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									width="20"
@@ -100,11 +100,11 @@ export default function OrderConfirmationModal({
 						<p className="text-gray-500 mb-6">
 							You will receive an email confirmation shortly.
 						</p>
-						<div className="flex flex-col md:flex-row bg-[#F1F1F1] rounded-lg overflow-hidden mb-6">
+						<div className="flex flex-col md:flex-row bg-very-light-gray rounded-lg overflow-hidden mb-6">
 							<div className="flex-1 p-4">
 								{firstItem && (
-									<div className="flex items-center gap-4 border-b border-gray-300 pb-4">
-										<div className="w-12 h-12 rounded-md overflow-hidden bg-gray-100 flex-shrink-0">
+									<div className="flex items-center gap-4 border-b border-light-gray pb-4">
+										<div className="w-12 h-12 rounded-md overflow-hidden bg-very-light-gray flex-shrink-0">
 											<Image
 												src={imageSrc}
 												alt={firstItem.title}
@@ -117,24 +117,24 @@ export default function OrderConfirmationModal({
 											<p className="text-sm font-medium">
 												{firstItem.title}
 											</p>
-											<p className="text-sm text-gray-500">
+											<p className="text-sm opacity-50">
 												${Number(firstItem.price).toLocaleString()}
 											</p>
 										</div>
-										<p className="ml-auto text-gray-500 text-sm">
+										<p className="ml-auto opacity-50 text-sm">
 											x{firstItem.qty}
 										</p>
 									</div>
 								)}
 								{otherCount > 0 && (
-									<p className="text-center text-xs text-gray-500 mt-3">
+									<p className="text-center text-xs opacity-50 mt-3">
 										and {otherCount} other item
 										{otherCount > 1 ? 's' : ''}
 									</p>
 								)}
 							</div>
 							<div className="bg-black text-white flex flex-col justify-center items-start p-4 md:w-1/2 rounded-b-lg md:rounded-b-none md:rounded-r-lg">
-								<p className="text-sm uppercase text-gray-400">
+								<p className="text-sm uppercase opacity-50">
 									Grand Total
 								</p>
 								<p className="text-lg font-bold">
@@ -145,7 +145,7 @@ export default function OrderConfirmationModal({
 
 						<Button
 							onClick={handleBackHome}
-							className="w-full bg-[#D87D4A] text-white hover:opacity-90 py-3 rounded-md"
+							className="w-full bg-burnt-orange text-white hover:opacity-90 py-3 rounded-md"
 						>
 							BACK TO HOME
 						</Button>

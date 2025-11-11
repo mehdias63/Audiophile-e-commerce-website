@@ -135,8 +135,12 @@ export default function CheckoutPage() {
 	}
 
 	return (
-		<section className="bg-[#F1F1F1] min-h-screen py-10 px-6 md:px-10 lg:px-20">
-			<Button variant="ghost" onClick={() => router.back()}>
+		<section className="bg-pure-snow min-h-screen py-10 px-6 md:px-10 lg:px-20">
+			<Button
+				variant="ghost"
+				onClick={() => router.back()}
+				className="opacity-50 mb-8"
+			>
 				Go Back
 			</Button>
 
@@ -160,7 +164,7 @@ export default function CheckoutPage() {
 										<div className="flex justify-between items-center">
 											<Label
 												htmlFor={field}
-												className={`${errors[field] ? 'text-red-500' : 'text-gray-700'}`}
+												className={`${errors[field] ? 'text-dark-red' : 'text-black mb-1'}`}
 											>
 												{field === 'name'
 													? 'Name'
@@ -169,7 +173,7 @@ export default function CheckoutPage() {
 														: 'Phone Number'}
 											</Label>
 											{errors[field] && (
-												<span className="text-xs text-red-500 font-medium">
+												<span className="text-xs text-dark-red font-medium">
 													{errors[field]}
 												</span>
 											)}
@@ -187,7 +191,7 @@ export default function CheckoutPage() {
 											}
 											className={`mt-1 ${
 												errors[field]
-													? 'border-red-500 focus-visible:ring-red-500'
+													? 'border-dark-red focus-visible:ring-dark-red'
 													: ''
 											}`}
 										/>
@@ -212,7 +216,7 @@ export default function CheckoutPage() {
 										<div className="flex justify-between items-center">
 											<Label
 												htmlFor={field}
-												className={`${errors[field] ? 'text-red-500' : 'text-gray-700'}`}
+												className={`${errors[field] ? 'text-dark-red' : 'text-black mb-1'}`}
 											>
 												{field === 'address'
 													? 'Address'
@@ -223,7 +227,7 @@ export default function CheckoutPage() {
 															: 'Country'}
 											</Label>
 											{errors[field] && (
-												<span className="text-xs text-red-500 font-medium">
+												<span className="text-xs text-dark-red font-medium">
 													{errors[field]}
 												</span>
 											)}
@@ -243,7 +247,7 @@ export default function CheckoutPage() {
 											}
 											className={`mt-1 ${
 												errors[field]
-													? 'border-red-500 focus-visible:ring-red-500'
+													? 'border-dark-red focus-visible:ring-dark-red'
 													: ''
 											}`}
 										/>
@@ -284,14 +288,14 @@ export default function CheckoutPage() {
 											<div className="flex justify-between items-center">
 												<Label
 													htmlFor={field}
-													className={`${errors[field] ? 'text-red-500' : 'text-gray-700'}`}
+													className={`${errors[field] ? 'text-dark-red' : 'text-black mb-1'}`}
 												>
 													{field === 'emoneyNum'
 														? 'e-Money Number'
 														: 'e-Money PIN'}
 												</Label>
 												{errors[field] && (
-													<span className="text-xs text-red-500 font-medium">
+													<span className="text-xs text-dark-red font-medium">
 														{errors[field]}
 													</span>
 												)}
@@ -305,7 +309,7 @@ export default function CheckoutPage() {
 												}
 												className={`mt-1 ${
 													errors[field]
-														? 'border-red-500 focus-visible:ring-red-500'
+														? 'border-dark-red focus-visible:ring-dark-red'
 														: ''
 												}`}
 											/>
@@ -338,7 +342,7 @@ export default function CheckoutPage() {
 									className="flex items-center justify-between"
 								>
 									<div className="flex items-center gap-3">
-										<div className="w-12 h-12 bg-gray-100 rounded-md overflow-hidden flex-shrink-0">
+										<div className="w-12 h-12 bg-gray-100 rounded-md overflow-hidden flex-shrink-0 p-2">
 											<Image
 												src={imageSrc}
 												alt={it.title}
@@ -351,35 +355,37 @@ export default function CheckoutPage() {
 											<p className="text-sm font-medium">
 												{displayTitle}
 											</p>
-											<p className="text-sm text-gray-500">
+											<p className="text-sm opacity-50">
 												${Number(it.price).toLocaleString()}
 											</p>
 										</div>
 									</div>
-									<p className="text-gray-500 text-sm">x{it.qty}</p>
+									<p className="opacity-50 text-sm">x{it.qty}</p>
 								</div>
 							)
 						})}
 					</div>
 
-					<div className="mt-6 space-y-2 text-sm">
-						<div className="flex justify-between text-gray-500">
-							<span>Total</span>
+					<div className="mt-6 space-y-2 text-sm uppercase">
+						<div className="flex justify-between">
+							<span className="opacity-50">Total</span>
 							<span className="font-bold">
 								${total.toLocaleString()}
 							</span>
 						</div>
-						<div className="flex justify-between text-gray-500">
-							<span>Shipping</span>
+						<div className="flex justify-between">
+							<span className="opacity-50">Shipping</span>
 							<span className="font-bold">${shipping}</span>
 						</div>
-						<div className="flex justify-between text-gray-500">
-							<span>VAT (Included)</span>
+						<div className="flex justify-between">
+							<span className="opacity-50">VAT (Included)</span>
 							<span className="font-bold">${vat.toFixed(0)}</span>
 						</div>
-						<div className="flex justify-between text-burnt-orange mt-4 text-base font-bold">
-							<span>Grand Total</span>
-							<span>${grandTotal.toFixed(0)}</span>
+						<div className="flex justify-between  mt-4 text-base font-bold">
+							<span className="opacity-50">Grand Total</span>
+							<span className="text-burnt-orange">
+								${grandTotal.toFixed(0)}
+							</span>
 						</div>
 					</div>
 

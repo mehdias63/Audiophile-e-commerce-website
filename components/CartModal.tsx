@@ -86,7 +86,7 @@ export default function CartModal() {
 				onClick={closeCart}
 			/>
 			<div className="relative m-8 w-[360px] bg-white rounded-lg shadow-2xl p-6 z-10">
-				<div className="flex items-center justify-between mb-4">
+				<div className="flex items-center justify-between mb-6">
 					<h3 className="font-semibold text-lg">
 						CART ({items.length})
 					</h3>
@@ -94,7 +94,7 @@ export default function CartModal() {
 						onClick={clearCart}
 						role="button"
 						tabIndex={0}
-						className="text-sm text-gray-500 hover:text-burnt-orange disabled:opacity-40 cursor-pointer select-none"
+						className="text-sm opacity-50 hover:text-burnt-orange disabled:opacity-40 cursor-pointer select-none"
 					>
 						Remove all
 					</span>
@@ -102,9 +102,7 @@ export default function CartModal() {
 
 				<div className="space-y-4 max-h-[420px] overflow-auto pr-2">
 					{items.length === 0 ? (
-						<p className="text-sm text-gray-500">
-							Your cart is empty.
-						</p>
+						<p className="text-sm opacity-50">Your cart is empty.</p>
 					) : (
 						items.map((it: CartItem) => {
 							const found = productImages.find(p => p.id === it.id)
@@ -120,7 +118,7 @@ export default function CartModal() {
 
 							return (
 								<div key={it.id} className="flex items-center gap-3">
-									<div className="w-12 h-12 rounded-md bg-gray-100 flex-shrink-0 overflow-hidden">
+									<div className="w-12 h-12 rounded-md bg-very-light-gray flex-shrink-0 overflow-hidden p-2">
 										<Image
 											src={imageSrc}
 											alt={it.title}
@@ -133,7 +131,7 @@ export default function CartModal() {
 										<p className="text-sm font-medium">
 											{displayTitle}
 										</p>
-										<p className="text-sm text-gray-500">
+										<p className="text-sm opacity-50">
 											${Number(it.price).toLocaleString()}
 										</p>
 									</div>
@@ -160,7 +158,7 @@ export default function CartModal() {
 					)}
 				</div>
 				<div className="mt-6 flex flex-col gap-3">
-					<div className="flex items-center justify-between text-sm text-gray-500">
+					<div className="flex items-center justify-between text-sm opacity-50">
 						<span>TOTAL</span>
 						<span className="font-bold text-lg">
 							${Number(total).toLocaleString()}

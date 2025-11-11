@@ -62,6 +62,7 @@ const config = {
 				'pure-snow': '#FAFAFA',
 				apricot: '#fbaf85',
 				'dark-gray': '#4C4C4C',
+				'light-gray': '#CFCFCF',
 				'dark-red': '#CD2C2C',
 				ice: '#FFF',
 				dark: '#141414',
