@@ -1,4 +1,4 @@
-# Frontend Mentor - Newsletter sign-up form with success message
+# Frontend Mentor - Audiophile e-commerce website form with success message
 
 This is a solution to the
 [Audiophile e-commerce website form with success message challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/audiophile-ecommerce-website-C8cuSd_wx).
@@ -7,7 +7,7 @@ building realistic projects.
 
 ## Table of contents
 
-- [Frontend Mentor - Newsletter sign-up form with success message](#frontend-mentor---newsletter-sign-up-form-with-success-message)
+- [Frontend Mentor - Audiophile e-commerce website form with success message](#frontend-mentor---audiophile-e-commerce-website-form-with-success-message)
   - [Table of contents](#table-of-contents)
   - [Overview](#overview)
     - [Screenshot](#screenshot)
